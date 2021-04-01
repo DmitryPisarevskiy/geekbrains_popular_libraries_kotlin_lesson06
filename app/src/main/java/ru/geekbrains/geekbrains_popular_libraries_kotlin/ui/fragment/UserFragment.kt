@@ -18,6 +18,7 @@ import ru.geekbrains.geekbrains_popular_libraries_kotlin.ui.BackButtonListener
 import ru.geekbrains.geekbrains_popular_libraries_kotlin.ui.adapter.ReposotoriesRVAdapter
 import ru.geekbrains.geekbrains_popular_libraries_kotlin.ui.navigation.AndroidScreens
 import ru.geekbrains.geekbrains_popular_libraries_kotlin.mvp.model.repo.RetrofitGithubRepositoriesRepo
+import ru.geekbrains.geekbrains_popular_libraries_kotlin.mvp.model.cache.RoomRepositoriesCache
 import ru.geekbrains.geekbrains_popular_libraries_kotlin.ui.network.AndroidNetworkStatus
 
 class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
@@ -39,7 +40,8 @@ class UserFragment : MvpAppCompatFragment(), UserView, BackButtonListener {
             RetrofitGithubRepositoriesRepo(
                 ApiHolder.api,
                 AndroidNetworkStatus(App.instance),
-                Database.getInstance()
+                Database.getInstance(),
+                RoomRepositoriesCache(Database.getInstance())
             ),
             App.instance.router,
             user,

@@ -12,6 +12,7 @@ import ru.geekbrains.geekbrains_popular_libraries_kotlin.databinding.FragmentUse
 import ru.geekbrains.geekbrains_popular_libraries_kotlin.mvp.model.api.ApiHolder
 import ru.geekbrains.geekbrains_popular_libraries_kotlin.mvp.model.entity.room.db.Database
 import ru.geekbrains.geekbrains_popular_libraries_kotlin.mvp.model.repo.RetrofitGithubUsersRepo
+import ru.geekbrains.geekbrains_popular_libraries_kotlin.mvp.model.cache.RoomUsersCache
 import ru.geekbrains.geekbrains_popular_libraries_kotlin.mvp.presenter.UsersPresenter
 import ru.geekbrains.geekbrains_popular_libraries_kotlin.mvp.view.UsersView
 import ru.geekbrains.geekbrains_popular_libraries_kotlin.ui.App
@@ -32,7 +33,8 @@ class UsersFragment : MvpAppCompatFragment(), UsersView, BackButtonListener {
             RetrofitGithubUsersRepo(
                 ApiHolder.api,
                 AndroidNetworkStatus(App.instance),
-                Database.getInstance()
+                Database.getInstance(),
+                RoomUsersCache(Database.getInstance()),
             ),
             App.instance.router, AndroidScreens(),
         )
